@@ -1,1 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link css file -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <title>Music App</title>
+</head>
+<body>
+    <div class="main_container">
+        <header>
+            <h2>Music App</h2>
+            <div class="menue">
+                <i class="fa fa-bars fa-2x"></i>
+    
+            </div>
+        </header>
+        <main>
+            <section class="img_section">
+                <div class="img_container">
+                    <img src="assets/img/img-6.jpg" alt="Music Cover" class="music_cover">
+                </div>
+            </section>
+
+            <section class="text_section">
+                <h4 class="music_title" >Night Owl</h4>
+                <strong class="author">Broke For Free</strong>
+            </section>
+
+            <section class="control_section">
+                <div class="previous"><i class="fa fa-step-backward fa-2x"></i></div>
+
+                <div class="play"><i class="fa fa-play-circle fa-3x"></i></div>
+                
+                <div class="next"><i class="fa fa-step-forward fa-2x"></i></div>
+            </section>
+            <section>
+                <div class="sound_control_container">
+                    <div class="start_time">00:00</div>
+                   <input type="range" min="1" max="100" value="1" class="sound_range"> 
+                   <div class="end_time">00:00</div>
+
+                </div>
+                <div class="volume_control">
+                    <div class="volume_increase"><i class="fa fa-volume-down"></i></div>
+                    <input type="range" min="1" max="100" value="1" class="volume_range"> 
+                    <div class="volume_decrease"> <i class="fa fa-volume-up"></i></div>
+                  
+                </div>
+            </section>
+        </main>
+    </div>
+<script src="script.js"></script>
+<!-- Font awesome -->
+<script src="https://kit.fontawesome.com/cd31aca100.js" crossorigin="anonymous"></script>
+</body>
+</html>
 
