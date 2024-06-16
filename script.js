@@ -12,9 +12,8 @@ let nextBtn = document.querySelector('.next');
 let time = document.querySelector('.start_time');
 let fullTime = document.querySelector('.end_time');
 let soundRangeControl = document.querySelector('.sound_range');
-let volumeIncreaseControl = document.querySelector('.volume_increase');
 let volumeRangeControl = document.querySelector('.volume_range');
-let volumeDecreaseControl = document.querySelector('.volume_decrease');
+let volumeControl = document.querySelector('.volume');
 let rotateAudioCover = document.querySelector('.img_container');
 
 //Global variables
@@ -147,17 +146,25 @@ function loadAudio() {
     //Change music cover
     musicCover.src = './assets/img/' + musicCoverList[audioIndex] + '.jpg';
 
+    //Reset the audio start and end time
+    time.innerHTML = '00:00';
+    fullTime.innerHTML = '0.00';
+
     //Reset the audio progress
     soundRangeControl.value = '1';
 
-    //eventListener that will wait for audio to load
-    audio.addEventListener('loadeddata', () =>{
-        //Show the duration of the loaded data
-        setTimeout(fullTime, audio.duration);
+    //EvenListener that waits for audio to load and update the audio duration
+    audio.addEventListener('loadedmetadata', () =>{
+        //Show the duration for the loaded audio(data)
+        fullTime.innerHTML = formatTime(audio.duration);
+    });
 
-        //Set max value to slider
-        soundRangeControl.setAttribute('max', audio.duration);
-        // console.log(something)
+    audio.addEventListener('timeupdate', () =>{
+        //Display audio current time
+        time.innerHTML = formatTime(audio.currentTime);
+        //convert audio current and set it as the value of the input range
+        let convertAudioCurrentTime = Math.floor(audio.currentTime);
+        soundRangeControl.value = convertAudioCurrentTime;
     })
 };
 
@@ -201,7 +208,7 @@ function nextAudio(){
 nextBtn.addEventListener('click', nextAudio);
 
 //event to trigger when audio end
-document.addEventListener('ended', nextAudio);
+audio.addEventListener('ended', nextAudio);
 
 
 //Rotate audio cover function
@@ -215,43 +222,29 @@ function stopRotateCover(){
     rotateAudioCover.style.animation = 'none';
 };
 
-//SetTime function
-function setTime(output, input){
-    //Caculate minute from input
-    const minutes = Math.floor(input / 60);
-    // console.log('Minutes:' + minutes);
-    //calculate seconds from input
-    const seconds = Math.floor(input % 60);
-    // console.log('Seconds:' + seconds);
-    //if the seconds are under 10
-    if(seconds < 10){
-        //add zero before the first number
-        time.innerHTML = minutes + ':0' + seconds;
-        // console.log(input);
-        //If it is over 10
-    }else{
-        time.innerHTML = minutes + ':' + seconds;
-    }
+//Function to set time in minutes and seconds
+function formatTime(seconds) {
+    //calculate minute from input
+    const minutes = Math.floor(seconds / 60);
+    //console.log(minutes);
+    //Calculate seconds from input
+    const remainingSeconds = Math.floor(seconds % 60);
+    /*Check if the seconds are under 10 add zero before the first number 
+    otherwise remove the zero and maintain the two digit number than return the function*/
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
 }
 
-//Output the audio track duration
-setTime(fullTime, audio.duration);
-
-//Where the time changes on the audio 
+//When the time changes on the audio 
 audio.addEventListener('timeupdate', () => {
     //Get the current audio time
     const currentAudioTime = Math.floor(audio.currentTime);
     // console.log(currentAudioTime)
-    //Get the percentage
-    const timePercentage = (currentAudioTime / audio.duration) * 100 + '%';
-    // console.log(timePercentage)
+    
     //Output the currnet audio time
-    setTime(time, currentAudioTime);
-    //Set the soundControl progress to the percentage
-    // soundRangeControl.style.width = timePercentage;
+    formatTime(time, currentAudioTime);
     soundRangeControl.value = currentAudioTime;
 
-});
+}); 
 
 //Customer slider function
 function customSlider(){
@@ -260,32 +253,46 @@ function customSlider(){
     //set the thumb and progress to the current value
     soundRangeControl.style.width = val;
     //Output the audio current time
-    setTime(time, soundRangeControl.value);
+    formatTime(time, soundRangeControl.value);
     //set audio current time to slider value
     audio.currentTime = soundRangeControl.value;
 }
 
+//invoke customSlider function
 customSlider();
 
-//repeat the function when the slider is selected
+//repeat the function when the slider is selected or drag
 soundRangeControl.addEventListener('click', customSlider);
-
-//volume slider current value
-let val;
 
 //volume slider function
 function customVolumeSlider(){
-    //get the max attribute value from slider
-    const maxVal = volumeRangeControl.getAttribute('max');
-    //Get the percentage
-    val = (volumeRangeControl.value / maxVal) + 100 + "%";
-    //Set the volume progress to the current value
-    volumeRangeControl.value = val;
+    //divide audio volume by 100
+    let changeVolume = (volumeRangeControl / 100);
+    console.log(changeVolume)
+
+    let updateAudioVolume = Math.floor(audio.volume * 100);
+    // let updateVolume = audio.volume;
+
+    console.log(audio.volume)
     //Set the audio volume to current value
+    // audio.volume = volumeRangeControl.value / 100;
     audio.volume = volumeRangeControl.value / 100;
+
+    //Change volume icon based on volume range
+    if(audio.volume === 0.0){
+        // alert("Volume is less than or equal to 0.5")
+        volumeControl.innerHTML = `<div class="volume_increase"> <i class="fa fa-volume-off"></i></div>`;
+    }else if(audio.volume < 0.6 && audio.volume !== 0.0 ){
+        volumeControl.innerHTML = `<div class="volume_increase"> <i class="fa fa-volume-down"></i></div>`;
+    }
+    else if(audio.volume > 0.6) {
+        volumeControl.innerHTML = `<div class="volume_increase"> <i class="fa fa-volume-up"></i></div>`;
+    }
 
 }
 
+//invoke customVollumeSlider function
 customVolumeSlider();
 
-volumeIncreaseControl.addEventListener('input', customVolumeSlider);
+//add eventlistener to volume control
+volumeRangeControl.addEventListener('input', customVolumeSlider);
