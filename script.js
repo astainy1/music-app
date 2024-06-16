@@ -15,6 +15,7 @@ let soundRangeControl = document.querySelector('.sound_range');
 let volumeRangeControl = document.querySelector('.volume_range');
 let volumeControl = document.querySelector('.volume');
 let rotateAudioCover = document.querySelector('.img_container');
+let audioRepeat = document.querySelector('.repeat');
 
 //Global variables
 /* Which audio is currently loaded (based on the numberical value)*/
@@ -23,6 +24,9 @@ let audioIndex = 0
 let isPlaying = false;
 //Is the volume muted
 let isSoundMuted = false;
+
+//Repeat mode
+let isRepeating = false;
 
 //Create curent sound element
 let active_music = document.createElement('audio');
@@ -208,7 +212,19 @@ function nextAudio(){
 nextBtn.addEventListener('click', nextAudio);
 
 //event to trigger when audio end
-audio.addEventListener('ended', nextAudio);
+audio.addEventListener('ended', () => {
+
+    if (isRepeating) {
+        
+        audio.play();
+        audio.currentTime = 0;
+
+    }else{
+
+        nextAudio();
+
+    }
+});
 
 
 //Rotate audio cover function
@@ -281,7 +297,7 @@ function customVolumeSlider(){
     //Change volume icon based on volume range
     if(audio.volume === 0.0){
         // alert("Volume is less than or equal to 0.5")
-        volumeControl.innerHTML = `<div class="volume_increase"> <i class="fa fa-volume-off"></i></div>`;
+        volumeControl.innerHTML = `<div class="volume_increase"> <i class="fa fa-volume-1"></i></div>`;
     }else if(audio.volume < 0.6 && audio.volume !== 0.0 ){
         volumeControl.innerHTML = `<div class="volume_increase"> <i class="fa fa-volume-down"></i></div>`;
     }
@@ -296,3 +312,29 @@ customVolumeSlider();
 
 //add eventlistener to volume control
 volumeRangeControl.addEventListener('input', customVolumeSlider);
+
+//Repeat function
+function repeatAudio(){
+
+    //Toggle repeat state
+    isRepeating = !isRepeating;
+
+    //check if it's repeating or not
+    if (isRepeating) {
+        
+        //Change repeat botton appearance
+        audioRepeat.style.color = 'orange'
+        console.log('is repeating')
+
+    }else{
+        //turn repeat off
+        isRepeating = false;
+        //change repeat button appearance
+        audioRepeat.style.color = '#fff';
+
+        console.log('not repeating')
+    }
+}
+
+//add event listener to repeat button invoking the repeat function
+audioRepeat.addEventListener('click', repeatAudio);
