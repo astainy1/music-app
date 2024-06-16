@@ -297,7 +297,7 @@ function customVolumeSlider(){
     //Change volume icon based on volume range
     if(audio.volume === 0.0){
         // alert("Volume is less than or equal to 0.5")
-        volumeControl.innerHTML = `<div class="volume_increase"> <i class="fa fa-volume-1"></i></div>`;
+        volumeControl.innerHTML = `<div class="volume_increase"> <i class="fa fa-volume-off"></i></div>`;
     }else if(audio.volume < 0.6 && audio.volume !== 0.0 ){
         volumeControl.innerHTML = `<div class="volume_increase"> <i class="fa fa-volume-down"></i></div>`;
     }
