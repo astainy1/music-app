@@ -119,7 +119,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 header{
@@ -323,10 +323,3 @@ img{
 .volume_range{
     width: 30%;
 }
-
-/* .volume_increase, .volume_decrease{
-    padding: 10px;
-}
-.end_time, .start_time{
-    padding: 10px;
-} */
