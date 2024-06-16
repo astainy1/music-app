@@ -35,6 +35,7 @@
             </section>
 
             <section class="control_section">
+                <!-- Audio control container -->
                 <div class="previous"><i class="fa fa-step-backward fa-2x"></i></div>
 
                 <div class="play"><i class="fa fa-play-circle fa-3x"></i></div>
@@ -42,23 +43,25 @@
                 <div class="next"><i class="fa fa-step-forward fa-2x"></i></div>
             </section>
             <section class="music_control">
+                <!-- Audio seeking container -->
                 <div class="sound_control_container">
                     <div class="start_time">00:00</div>
                    <input type="range" min="1" max="100" value="1" class="sound_range"> 
                    <div class="end_time">22:55</div>
 
                 </div>
+                <!-- Volume control section -->
                 <div class="volume_control">
-                    <div class="volume_increase"><i class="fa fa-volume-up"></i></div>
-                    <input type="range" min="1" max="100" value="1" class="volume_range"> 
-                    <!-- <div class="volume_decrease"> <i class="fa fa-volume-up"></i></div> -->
+
+                    <div class="volume"><i class="fa fa-volume-off"></i></div>
+                    <input type="range" min="0" max="100" value="1" step="0.01" class="volume_range"> 
                   
                 </div>
             </section>
             <section>
-                <audio id="audio" hidden>
-                    <source src="./assets/music/Immortal.mp3">
-                    Your browser does not support the audio element.
+                <!-- Default audio -->
+                <audio id="audio" controls hidden>
+                    <source src="./assets/music/Immortal.mp3" type="audio/mpeg">
                 </audio>
             </section>
         </main>
