@@ -136,7 +136,7 @@ header{
     max-width: 50vw;
     height: auto;
     background: #28262c;
-    color: #eee;
+    color: #fff;
     /* background: linear-gradient(to bottom left, rgb(33, 122, 0), rgb(25, 196, 2), rgb(31, 253, 31)); */
     box-shadow: 2px 4px 15px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -252,7 +252,7 @@ img{
     margin: 0 10px;
 }
 
-.fa-step-forward, .fa-step-backward, .fa-play-circle, .fa-volume-up, .fa-pause-circle{
+.fa-step-forward, .fa-step-backward, .fa-play-circle, .fa-volume-up, .fa-pause-circle, .fa-repeat{
     cursor: pointer;
     opacity: 0.8;
     transition: opacity .2s;
@@ -323,3 +323,10 @@ img{
 .volume_range{
     width: 30%;
 }
+
+/* .volume_increase, .volume_decrease{
+    padding: 10px;
+}
+.end_time, .start_time{
+    padding: 10px;
+} */
