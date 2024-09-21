@@ -1,7 +1,7 @@
 //Test connection
 // alert("Connection established");
 
-// Get reference all html elements
+// Get reference to all html elements
 let audio = document.getElementById('audio');
 let musicArtist = document.querySelector('.author');
 let musicTitle = document.querySelector('.music_title');
@@ -16,6 +16,8 @@ let volumeRangeControl = document.querySelector('.volume_range');
 let volumeControl = document.querySelector('.volume');
 let rotateAudioCover = document.querySelector('.img_container');
 let audioRepeat = document.querySelector('.repeat');
+const menuBar = document.querySelector('.menue').style.display = 'none';
+
 
 //Global variables
 /* Which audio is currently loaded (based on the numberical value)*/
@@ -31,29 +33,67 @@ let isRepeating = false;
 //Create curent sound element
 let active_music = document.createElement('audio');
 
-//Create the list of all music and their followiing details
+//Create the list of all music and their following details
 
 let musicList = [
+
+    'Best seller',
+    'Corporate Business',
+    'Corporate Amp',
+    'Corporate',
+    'Ppbeat Tech',
+    'Uplifting',
     'Enough',
+    'Event Promo',
     'Get Through',
     'Immortal',
     'Lofi Mallet',
+    'Marketing Awards',
+    'Ambient',
+    'Cinematic',
+    'Tech Promo',
     'No Talk',
+    'Positive',
+    'Positive Promo',
+    'Ppbeat Tech',
     'Skylines',
-    'Winning'
+    'Summer Pop',
+    'Corporate Ad',
+    'Winning',
+
 ];
 
 let musicArtistList = [
-    'Daniel Ayee',
-    'Astiany Harris',
+
+    'Unkown',
+    'Bestand Bless',
+    'Unkown',
+    'Unkown',
+    'Unkown',
+    'Unkown',
     'Thomas Voya',
+    'Unkown',
+    'Unkown',
     'Gabriel Kun',
-    'Praise Wiles',
-    'Pruh Sheriff',
-    'Blessboy Gmore',
+    'Astainy',
+    'Corporate Business',
+    'Promo',
+    'Cinematic Promo',
+    'Unkown',
+    'Godbless',
+    'Unkown',
+    'Unkown',
+    'Unkown',
+    'Unkown',
+    'Unkown',
+    'Unkown',
+    'Unkown'
+
+
 ];
 
 let musicCoverList = [
+
     'img-1',
     'img-2',
     'img-3',
@@ -61,15 +101,33 @@ let musicCoverList = [
     'img-5',
     'img-6',
     'img-7',
+    'img-10',
+    'img-11',
+    'img-9',
+    'img-8',
+    'img-12',
+    'img-13',
+    'img-14',
+    'img-15',
+    'img-16',
+    'img-17',
+    'img-18',
+    'img-19',
+    'img-20',
+    'img-21',
+    'img-22',
+    'img-23'
+
+
 ]
 
 //add click event on the play button
 playBtn.addEventListener('click', playAudio);
 
 //Play audio function
-function playAudio(){
+function playAudio() {
     //If the audio is not playing 
-    if(isPlaying === false){
+    if (isPlaying === false) {
 
         audio.play(); /*invoke JavaScipt inbuilt 
                         play function to 
@@ -92,7 +150,7 @@ function playAudio(){
     }
     /*Else set the is playing to false
        because the audio is not playing */
-    else{
+    else {
 
         audio.pause(); /*invoke JavaScipt inbuilt 
                         pause function to 
@@ -116,10 +174,10 @@ function playAudio(){
 
 //Switching audio play
 function switchAudio() {
-    
+
     //Check if audio is playing
-    if(isPlaying === true){
-        
+    if (isPlaying === true) {
+
         //Continue playing the audio
         audio.play(); /*invoke JavaScipt inbuilt 
                         play function to 
@@ -140,7 +198,7 @@ function loadAudio() {
     audio.load(); /*invoke JavaScipt inbuilt 
                     load function to 
                     HTML audio element. */
-    
+
     //Change music title
     musicTitle.innerHTML = musicList[audioIndex];
 
@@ -158,12 +216,12 @@ function loadAudio() {
     soundRangeControl.value = '1';
 
     //EvenListener that waits for audio to load and update the audio duration
-    audio.addEventListener('loadedmetadata', () =>{
+    audio.addEventListener('loadedmetadata', () => {
         //Show the duration for the loaded audio(data)
         fullTime.innerHTML = formatTime(audio.duration);
     });
 
-    audio.addEventListener('timeupdate', () =>{
+    audio.addEventListener('timeupdate', () => {
         //Display audio current time
         time.innerHTML = formatTime(audio.currentTime);
         //convert audio current and set it as the value of the input range
@@ -180,7 +238,7 @@ previousBtn.addEventListener('click', () => {
     audioIndex--;
 
     //check if audio id less than 0;
-    if(audioIndex < 0){
+    if (audioIndex < 0) {
         audioIndex = musicList.length - 1;
     }
 
@@ -193,11 +251,11 @@ previousBtn.addEventListener('click', () => {
 });
 
 //Next audio function
-function nextAudio(){
+function nextAudio() {
     //Increment audio Id
     audioIndex++
 
-    if(audioIndex > musicList.length -1){
+    if (audioIndex > musicList.length - 1) {
         audioIndex = 0;
     };
 
@@ -215,11 +273,11 @@ nextBtn.addEventListener('click', nextAudio);
 audio.addEventListener('ended', () => {
 
     if (isRepeating) {
-        
+
         audio.play();
         audio.currentTime = 0;
 
-    }else{
+    } else {
 
         nextAudio();
 
@@ -234,7 +292,7 @@ function rotateCover() {
 }
 
 //Stop audio cover function
-function stopRotateCover(){
+function stopRotateCover() {
     rotateAudioCover.style.animation = 'none';
 };
 
@@ -255,15 +313,15 @@ audio.addEventListener('timeupdate', () => {
     //Get the current audio time
     const currentAudioTime = Math.floor(audio.currentTime);
     // console.log(currentAudioTime)
-    
+
     //Output the currnet audio time
     formatTime(time, currentAudioTime);
     soundRangeControl.value = currentAudioTime;
 
-}); 
+});
 
 //Customer slider function
-function customSlider(){
+function customSlider() {
     //Get the percentage
     const val = (soundRangeControl.value / audio.duration) * 100;
     //set the thumb and progress to the current value
@@ -281,7 +339,7 @@ customSlider();
 soundRangeControl.addEventListener('click', customSlider);
 
 //volume slider function
-function customVolumeSlider(){
+function customVolumeSlider() {
     //divide audio volume by 100
     let changeVolume = (volumeRangeControl / 100);
     console.log(changeVolume)
@@ -295,13 +353,13 @@ function customVolumeSlider(){
     audio.volume = volumeRangeControl.value / 100;
 
     //Change volume icon based on volume range
-    if(audio.volume === 0.0){
+    if (audio.volume === 0.0) {
         // alert("Volume is less than or equal to 0.5")
         volumeControl.innerHTML = `<div class="volume_increase"> <i class="fa fa-volume-off"></i></div>`;
-    }else if(audio.volume < 0.6 && audio.volume !== 0.0 ){
+    } else if (audio.volume < 0.6 && audio.volume !== 0.0) {
         volumeControl.innerHTML = `<div class="volume_increase"> <i class="fa fa-volume-down"></i></div>`;
     }
-    else if(audio.volume > 0.6) {
+    else if (audio.volume > 0.6) {
         volumeControl.innerHTML = `<div class="volume_increase"> <i class="fa fa-volume-up"></i></div>`;
     }
 
@@ -314,19 +372,19 @@ customVolumeSlider();
 volumeRangeControl.addEventListener('input', customVolumeSlider);
 
 //Repeat function
-function repeatAudio(){
+function repeatAudio() {
 
     //Toggle repeat state
     isRepeating = !isRepeating;
 
     //check if it's repeating or not
     if (isRepeating) {
-        
+
         //Change repeat botton appearance
         audioRepeat.style.color = 'orange'
         console.log('is repeating')
 
-    }else{
+    } else {
         //turn repeat off
         isRepeating = false;
         //change repeat button appearance
