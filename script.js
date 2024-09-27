@@ -57,6 +57,7 @@ let musicList = [
     'Positive Promo',
     'Ppbeat Tech',
     'Skylines',
+    'Tell Us',
     'Summer Pop',
     'Corporate Ad',
     'Winning',
@@ -85,6 +86,7 @@ let musicArtistList = [
     'Unkown',
     'Unkown',
     'Unkown',
+    'G-More',
     'Unkown',
     'Unkown',
     'Unkown'
@@ -116,7 +118,8 @@ let musicCoverList = [
     'img-20',
     'img-21',
     'img-22',
-    'img-23'
+    'img-23',
+    'img-24'
 
 
 ]
