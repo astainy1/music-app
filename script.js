@@ -36,7 +36,6 @@ let active_music = document.createElement('audio');
 //Create the list of all music and their following details
 
 let musicList = [
-
     'Best seller',
     'Corporate Business',
     'Corporate Amp',
@@ -60,12 +59,10 @@ let musicList = [
     'Tell Us',
     'Summer Pop',
     'Corporate Ad',
-    'Winning',
-
+    'Winning'
 ];
 
 let musicArtistList = [
-
     'Unkown',
     'Bestand Bless',
     'Unkown',
@@ -90,12 +87,9 @@ let musicArtistList = [
     'Unkown',
     'Unkown',
     'Unkown'
-
-
 ];
 
 let musicCoverList = [
-
     'img-1',
     'img-2',
     'img-3',
@@ -120,8 +114,6 @@ let musicCoverList = [
     'img-22',
     'img-23',
     'img-24'
-
-
 ]
 
 //add click event on the play button
@@ -189,14 +181,14 @@ function switchAudio() {
 }
 
 //Create const variable to hold the audio path
-const audioPath = '../assets/music' + musicArtistList[audioIndex] + 'mp3';
+const audioPath = './music/' + musicArtistList[audioIndex] + 'mp3';
 
 //Load audio function
 
 function loadAudio() {
 
     //change audio src according to the index
-    audio.src = './assets/music/' + musicList[audioIndex] + '.mp3';
+    audio.src = './music/' + musicList[audioIndex] + '.mp3';
 
     audio.load(); /*invoke JavaScipt inbuilt 
                     load function to 
@@ -209,7 +201,7 @@ function loadAudio() {
     musicArtist.innerHTML = musicArtistList[audioIndex];
 
     //Change music cover
-    musicCover.src = './assets/img/' + musicCoverList[audioIndex] + '.jpg';
+    musicCover.src = './img/' + musicCoverList[audioIndex] + '.jpg';
 
     //Reset the audio start and end time
     time.innerHTML = '00:00';
