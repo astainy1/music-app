@@ -189,14 +189,14 @@ function switchAudio() {
 }
 
 //Create const variable to hold the audio path
-const audioPath = '../assets/music' + musicArtistList[audioIndex] + 'mp3';
+const audioPath = './music/' + musicArtistList[audioIndex] + 'mp3';
 
 //Load audio function
 
 function loadAudio() {
 
     //change audio src according to the index
-    audio.src = './assets/music/' + musicList[audioIndex] + '.mp3';
+    audio.src = './music/' + musicList[audioIndex] + '.mp3';
 
     audio.load(); /*invoke JavaScipt inbuilt 
                     load function to 
@@ -209,7 +209,7 @@ function loadAudio() {
     musicArtist.innerHTML = musicArtistList[audioIndex];
 
     //Change music cover
-    musicCover.src = './assets/img/' + musicCoverList[audioIndex] + '.jpg';
+    musicCover.src = './img/' + musicCoverList[audioIndex] + '.jpg';
 
     //Reset the audio start and end time
     time.innerHTML = '00:00';
